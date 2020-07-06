@@ -1,0 +1,20 @@
+R_DEF: Internal format may change without notice
+local
+attr SNPickerStyle
+attr? snp_animationType
+attr? snp_bigTextColor
+attr? snp_bigTextSize
+attr? snp_delimNumber
+attr? snp_max
+attr? snp_min
+attr? snp_notchColor
+attr? snp_notchSize
+attr? snp_smallTextColor
+attr? snp_smallTextSize
+attr? snp_vertical
+id notch
+id text
+layout weight_item
+layout weight_item_vert
+string app_name
+styleable SNPicker snp_smallTextColor snp_bigTextColor snp_smallTextSize snp_bigTextSize snp_animationType snp_notchSize snp_notchColor snp_delimNumber snp_min snp_max snp_vertical
