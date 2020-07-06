@@ -14,21 +14,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ((SimpleNumberPicker) findViewById(R.id.horizontal_1)).setOnNewValueSelectedListener(new OnNewValueSelectedListener() {
-            @Override
-            public void newValueSelected(int value) {
-                ((TextView) findViewById(R.id.horizontal_1_v)).setText(String.valueOf(value));
-            }
-        });
-
-        ((SimpleNumberPicker) findViewById(R.id.horizontal_2)).setOnNewValueSelectedListener(new OnNewValueSelectedListener() {
-            @Override
-            public void newValueSelected(int value) {
-                ((TextView) findViewById(R.id.horizontal_2_v)).setText(String.valueOf(value));
-            }
-        });
-
         ((SimpleNumberPicker) findViewById(R.id.vertical_1)).setOnNewValueSelectedListener(new OnNewValueSelectedListener() {
             @Override
             public void newValueSelected(int value) {

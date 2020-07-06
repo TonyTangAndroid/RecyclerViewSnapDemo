@@ -1,141 +1,57 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:paddingLeft="@dimen/activity_horizontal_margin"
+  android:paddingTop="@dimen/activity_vertical_margin"
+  android:paddingRight="@dimen/activity_horizontal_margin"
+  android:paddingBottom="@dimen/activity_vertical_margin"
+  tools:context=".MainActivity">
 
+
+  <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content">
 
+    <RelativeLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+      <org.kidinov.snp_lib.SimpleNumberPicker
+        android:id="@+id/vertical_1"
+        android:layout_width="100dp"
+        android:layout_height="250dp"
+        app:snp_animationType="slide_in_right"
+        app:snp_bigTextColor="#ff8a5600"
+        app:snp_bigTextSize="12sp"
+        app:snp_delimNumber="5"
+        app:snp_max="500"
+        app:snp_min="100"
+        app:snp_notchColor="#ff4a4533"
+        app:snp_notchSize="10dp"
+        app:snp_smallTextColor="#FFC107"
+        app:snp_smallTextSize="5sp"
+        app:snp_vertical="true" />
 
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
+      <View
+        android:layout_width="80dp"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@android:color/black" />
 
-            <org.kidinov.snp_lib.SimpleNumberPicker
-                android:id="@+id/horizontal_1"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                app:snp_min="10"
-                app:snp_max="100"
-                />
+    </RelativeLayout>
 
-            <View
-                android:background="@android:color/black"
-                android:layout_centerInParent="true"
-                android:layout_width="1dp"
-                android:layout_height="80dp"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:text="1"
-            android:textColor="#727272"
-            android:textSize="40sp"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/horizontal_1_v"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-
-            <org.kidinov.snp_lib.SimpleNumberPicker
-                android:id="@+id/horizontal_2"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                app:snp_min="100"
-                app:snp_max="500"
-                app:snp_bigTextColor="#03A9F4"
-                app:snp_smallTextColor="#0288D1"
-                app:snp_smallTextSize="6sp"
-                app:snp_bigTextSize="15sp"
-                app:snp_animationType="alpha"
-                app:snp_notchSize="5sp"
-                app:snp_notchColor="#B3E5FC"
-                app:snp_delimNumber="5"
-                />
-
-            <View
-                android:background="#ccc"
-                android:layout_centerInParent="true"
-                android:layout_width="1dp"
-                android:layout_height="80dp"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:text="1"
-            android:textSize="40sp"
-            android:textColor="#727272"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/horizontal_2_v"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <org.kidinov.snp_lib.SimpleNumberPicker
-                android:id="@+id/vertical_1"
-                android:layout_width="100dp"
-                android:layout_height="250dp"
-                app:snp_min="100"
-                app:snp_max="500"
-                app:snp_smallTextColor="#FFC107"
-                app:snp_bigTextColor="#ff8a5600"
-                app:snp_smallTextSize="5sp"
-                app:snp_bigTextSize="12sp"
-                app:snp_animationType="slide_in_right"
-                app:snp_notchSize="10dp"
-                app:snp_notchColor="#ff4a4533"
-                app:snp_vertical="true"
-                app:snp_delimNumber="5"
-                />
-
-            <View
-                android:background="@android:color/black"
-                android:layout_centerInParent="true"
-                android:layout_width="80dp"
-                android:layout_height="1dp"/>
-
-        </RelativeLayout>
-
-        <TextView
-            android:text="1"
-            android:textSize="40sp"
-            android:textColor="#727272"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/vertical_1_v"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+    <TextView
+      android:id="@+id/vertical_1_v"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_vertical"
+      android:text="1"
+      android:textColor="#727272"
+      android:textSize="40sp" />
+  </LinearLayout>
 
 </LinearLayout>
