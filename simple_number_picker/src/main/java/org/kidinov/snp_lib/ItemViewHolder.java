@@ -1,8 +1,6 @@
 package org.kidinov.snp_lib;
 
-import android.graphics.Typeface;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +17,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
   public void bind(String value, boolean selected) {
     textView.setText(value);
-    textView.setTypeface(textView.getTypeface(), selected ? Typeface.BOLD : Typeface.NORMAL);
+    textView.setTextColor(textView.getContext().getResources()
+        .getColor(selected ? android.R.color.holo_red_dark : android.R.color.black));
   }
 }
