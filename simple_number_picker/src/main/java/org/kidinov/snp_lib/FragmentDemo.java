@@ -48,7 +48,7 @@ public class FragmentDemo extends Fragment {
           }
         });
 
-    SnapHelper snapHelper = new LinearSnapHelper();
+    LinearSnapHelper snapHelper = new LinearSnapHelper();
     snapHelper.attachToRecyclerView(recycler_view);
   }
 
@@ -58,14 +58,21 @@ public class FragmentDemo extends Fragment {
 
   private List<String> params() {
     List<String> result = new ArrayList<>();
-    for (int i = 1; i <= 10; i++) {
+    for (int i = 0; i < 10; i++) {
       result.add("Tier" + i);
     }
     return result;
   }
 
   private int selectedIndex() {
-    return llm.findFirstVisibleItemPosition()
-        + (llm.findLastVisibleItemPosition() - llm.findFirstVisibleItemPosition()) / 2;
+    int last = llm.findLastCompletelyVisibleItemPosition();
+    System.out.println("Last:" + last);
+    if (last == llm.getItemCount() - 1) {
+      return last;
+    }
+    int firstVisibleItemPosition = llm.findFirstVisibleItemPosition();
+    int lastVisibleItemPosition = llm.findLastVisibleItemPosition();
+    return firstVisibleItemPosition
+        + (lastVisibleItemPosition - firstVisibleItemPosition) / 2;
   }
 }
