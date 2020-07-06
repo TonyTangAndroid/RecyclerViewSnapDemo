@@ -2,37 +2,47 @@ package org.kidinov.snp_lib;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 
 public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-  private Params params;
-  private LayoutInflater li;
+  private Context context;
+  private List<String> list;
 
-  public SimplePickerAdapter(Context ctx, Params params) {
-    this.params = params;
-    li = LayoutInflater.from(ctx);
+  public SimplePickerAdapter(Context context, List<String> list) {
+    this.context = context;
+    this.list = list;
   }
 
   @NonNull
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    return new ItemViewHolder(li.inflate(R.layout.weight_item, parent, false), params);
+    View view = LayoutInflater.from(context).inflate(R.layout.item_weight, parent, false);
+    return new ItemViewHolder(view);
 
   }
 
   @Override
-  public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int index) {
-    ItemViewHolder h = (ItemViewHolder) holder;
-    h.bind(index);
+  public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
+    itemViewHolder.bind(list.get(position), selected(position));
+  }
+
+  private boolean selected(int position) {
+    return position % 2 == 0;
   }
 
   @Override
   public int getItemCount() {
-    return params.getMax() - params.getMin();
+    return list.size();
   }
 
+  public String getData(int index) {
+    return list.get(index);
+  }
 }

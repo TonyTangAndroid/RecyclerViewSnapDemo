@@ -9,27 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
   private TextView textView;
-  private Params params;
 
-  public ItemViewHolder(View v, Params params) {
+  public ItemViewHolder(View v) {
     super(v);
-    this.params = params;
     RelativeLayout view = (RelativeLayout) v;
     textView = view.findViewById(R.id.text);
   }
 
-  public void bind(int index) {
-    index += params.getMin();
-    if (index % params.getDelimNumber() != 0) {
-      textView.setText(String.valueOf(index));
-      textView.setTextSize(params.getSmallTextSize());
-      textView.setTypeface(textView.getTypeface(), Typeface.NORMAL);
-      textView.setTextColor(params.getSmallTextColor());
-    } else {
-      textView.setText(String.valueOf(index));
-      textView.setTextSize(params.getBigTextSize());
-      textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
-      textView.setTextColor(params.getBigTextColor());
-    }
+  public void bind(String value, boolean selected) {
+    textView.setText(value);
+    textView.setTypeface(textView.getTypeface(), selected ? Typeface.BOLD : Typeface.NORMAL);
   }
 }

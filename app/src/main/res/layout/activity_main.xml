@@ -1,6 +1,6 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/fragment_demo"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:orientation="vertical"
@@ -8,30 +8,4 @@
   android:paddingTop="@dimen/activity_vertical_margin"
   android:paddingRight="@dimen/activity_horizontal_margin"
   android:paddingBottom="@dimen/activity_vertical_margin"
-  tools:context=".MainActivity">
-
-
-  <org.kidinov.snp_lib.SimpleNumberPicker
-    android:id="@+id/picker"
-    android:layout_width="100dp"
-    android:layout_height="250dp"
-    app:snp_animationType="slide_in_right"
-    app:snp_bigTextColor="#ff8a5600"
-    app:snp_bigTextSize="12sp"
-    app:snp_delimNumber="5"
-    app:snp_max="500"
-    app:snp_min="100"
-    app:snp_smallTextColor="#FFC107"
-    app:snp_smallTextSize="5sp" />
-
-
-  <TextView
-    android:id="@+id/tv_selected_item"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
-    android:text="1"
-    android:textColor="#727272"
-    android:textSize="40sp" />
-
-</LinearLayout>
+  tools:context=".MainActivity" />
