@@ -44,7 +44,7 @@ public class SimpleNumberPicker extends LinearLayout {
         public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
           super.onScrolled(recyclerView, dx, dy);
           if (onNewValueSelected != null) {
-            onNewValueSelected.newValueSelected(params.getMin() + getValue());
+            onNewValueSelected.newValueSelected(targetIndex(params));
           }
         }
       });
@@ -53,6 +53,10 @@ public class SimpleNumberPicker extends LinearLayout {
       typedArray.recycle();
     }
     addView(rv);
+  }
+
+  private int targetIndex(Params params) {
+    return params.getMin() + selectedIndex();
   }
 
   private Params readParams(TypedArray ta) {
@@ -76,9 +80,8 @@ public class SimpleNumberPicker extends LinearLayout {
     return builder.build();
   }
 
-  private int getValue() {
-    return llm.findFirstVisibleItemPosition()
-        + (llm.findLastVisibleItemPosition() - llm.findFirstVisibleItemPosition()) / 2;
+  private int selectedIndex() {
+    return llm.findFirstVisibleItemPosition() + (llm.findLastVisibleItemPosition() - llm.findFirstVisibleItemPosition()) / 2;
   }
 
   public void setOnNewValueSelectedListener(OnNewValueSelectedListener onNewValueSelected) {
