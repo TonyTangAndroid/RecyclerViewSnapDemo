@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-
 public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private Context context;
@@ -24,7 +23,6 @@ public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
   public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(context).inflate(R.layout.item_weight, parent, false);
     return new ItemViewHolder(view);
-
   }
 
   @Override

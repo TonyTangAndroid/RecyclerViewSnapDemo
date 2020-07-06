@@ -7,6 +7,5 @@ import org.junit.Test;
 public class EnvHelperTest {
 
   @Test
-  public void dpFromPx() {
-  }
+  public void dpFromPx() {}
 }

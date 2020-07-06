@@ -15,14 +15,15 @@ import java.util.List;
 
 public class FragmentDemo extends Fragment {
 
-
   private RecyclerView recycler_view;
   private TextView tv_selected_item;
   private LinearLayoutManager llm;
 
   @Nullable
   @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+  public View onCreateView(
+      @NonNull LayoutInflater inflater,
+      @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_demo, container, false);
     recycler_view = rootView.findViewById(R.id.recycler_view);
@@ -36,13 +37,14 @@ public class FragmentDemo extends Fragment {
     recycler_view.setLayoutManager(llm);
     SimplePickerAdapter adapter = new SimplePickerAdapter(requireContext(), params());
     recycler_view.setAdapter(adapter);
-    recycler_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
-      @Override
-      public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-        super.onScrolled(recyclerView, dx, dy);
-        newValueSelected(adapter.getData(selectedIndex()));
-      }
-    });
+    recycler_view.addOnScrollListener(
+        new RecyclerView.OnScrollListener() {
+          @Override
+          public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            newValueSelected(adapter.getData(selectedIndex()));
+          }
+        });
   }
 
   private void newValueSelected(String data) {
@@ -57,10 +59,8 @@ public class FragmentDemo extends Fragment {
     return result;
   }
 
-
   private int selectedIndex() {
     return llm.findFirstVisibleItemPosition()
         + (llm.findLastVisibleItemPosition() - llm.findFirstVisibleItemPosition()) / 2;
   }
-
 }
