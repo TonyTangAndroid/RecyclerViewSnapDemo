@@ -9,7 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +47,9 @@ public class FragmentDemo extends Fragment {
             newValueSelected(adapter.getData(selectedIndex()));
           }
         });
+
+    SnapHelper snapHelper = new LinearSnapHelper();
+    snapHelper.attachToRecyclerView(recycler_view);
   }
 
   private void newValueSelected(String data) {
