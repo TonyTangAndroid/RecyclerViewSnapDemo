@@ -2,13 +2,14 @@ package org.kidinov.snp_lib;
 
 import android.graphics.Typeface;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
-  private TextView textView;
+  private final TextView textView;
 
   public ItemViewHolder(View v) {
     super(v);

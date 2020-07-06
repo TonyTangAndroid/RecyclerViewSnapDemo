@@ -3,6 +3,7 @@ package org.kidinov.snp_lib;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,12 +11,15 @@ import java.util.List;
 
 public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-  private Context context;
-  private List<String> list;
+  private final Context context;
+  private final List<String> list;
+  private final OnClickListener onClickListener;
 
-  public SimplePickerAdapter(Context context, List<String> list) {
+  public SimplePickerAdapter(Context context, List<String> list,
+      OnClickListener onClickListener) {
     this.context = context;
     this.list = list;
+    this.onClickListener = onClickListener;
   }
 
   @NonNull
@@ -28,6 +32,8 @@ public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
   @Override
   public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
     ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
+    itemViewHolder.itemView.setTag(position);
+    itemViewHolder.itemView.setOnClickListener(onClickListener);
     itemViewHolder.bind(list.get(position), selected(position));
   }
 

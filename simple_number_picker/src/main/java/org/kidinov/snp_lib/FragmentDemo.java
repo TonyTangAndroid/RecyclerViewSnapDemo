@@ -3,6 +3,7 @@ package org.kidinov.snp_lib;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -11,11 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentDemo extends Fragment {
+public class FragmentDemo extends Fragment implements OnClickListener {
 
   private RecyclerView recycler_view;
   private TextView tv_selected_item;
@@ -37,7 +37,8 @@ public class FragmentDemo extends Fragment {
   public void initRecyclerView() {
     llm = new LinearLayoutManager(requireContext());
     recycler_view.setLayoutManager(llm);
-    SimplePickerAdapter adapter = new SimplePickerAdapter(requireContext(), params());
+    SimplePickerAdapter adapter = new SimplePickerAdapter(requireContext(), params(),
+        this);
     recycler_view.setAdapter(adapter);
     recycler_view.addOnScrollListener(
         new RecyclerView.OnScrollListener() {
@@ -74,5 +75,10 @@ public class FragmentDemo extends Fragment {
     int lastVisibleItemPosition = llm.findLastVisibleItemPosition();
     return firstVisibleItemPosition
         + (lastVisibleItemPosition - firstVisibleItemPosition) / 2;
+  }
+
+  @Override
+  public void onClick(View view) {
+    recycler_view.smoothScrollToPosition((int) view.getTag());
   }
 }
