@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import complied.AttachSnapHelperWithListenerKt;
+import complied.OnSnapPositionChangeListener;
+import complied.SnapOnScrollListener.Behavior;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,17 +43,16 @@ public class FragmentDemo extends Fragment implements OnClickListener {
     SimplePickerAdapter adapter = new SimplePickerAdapter(requireContext(), params(),
         this);
     recycler_view.setAdapter(adapter);
-    recycler_view.addOnScrollListener(
-        new RecyclerView.OnScrollListener() {
-          @Override
-          public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-            super.onScrolled(recyclerView, dx, dy);
-            newValueSelected(adapter.getData(selectedIndex()));
-          }
-        });
-
     LinearSnapHelper snapHelper = new LinearSnapHelper();
     snapHelper.attachToRecyclerView(recycler_view);
+
+    AttachSnapHelperWithListenerKt.attachSnapHelperWithListener(recycler_view, snapHelper,
+        Behavior.NOTIFY_ON_SCROLL_STATE_IDLE, new OnSnapPositionChangeListener() {
+          @Override
+          public void onSnapPositionChange(int var1) {
+            newValueSelected(adapter.getData(var1));
+          }
+        });
   }
 
   private void newValueSelected(String data) {
