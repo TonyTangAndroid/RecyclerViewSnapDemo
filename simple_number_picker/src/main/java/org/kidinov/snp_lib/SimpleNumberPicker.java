@@ -3,17 +3,10 @@ package org.kidinov.snp_lib;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
-
-import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.AnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.ScaleInAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.SlideInBottomAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.SlideInLeftAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.adapters.SlideInRightAnimationAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class SimpleNumberPicker extends LinearLayout {
     private OnNewValueSelectedListener onNewValueSelected;
@@ -39,34 +32,7 @@ public class SimpleNumberPicker extends LinearLayout {
                     typedArray.getBoolean(R.styleable.SNPicker_snp_vertical, false) ? LinearLayoutManager.VERTICAL : LinearLayoutManager.HORIZONTAL, false);
             rv.setLayoutManager(llm);
 
-            AnimationAdapter adapter;
-            SimplePickerAdapter innerAdapter = new SimplePickerAdapter(context, params);
-            if (typedArray.getString(R.styleable.SNPicker_snp_animationType) == null) {
-                adapter = new ScaleInAnimationAdapter(innerAdapter);
-            } else {
-                switch (typedArray.getString(R.styleable.SNPicker_snp_animationType)) {
-                    case "scale":
-                        adapter = new ScaleInAnimationAdapter(innerAdapter);
-                        break;
-                    case "alpha":
-                        adapter = new AlphaInAnimationAdapter(innerAdapter);
-                        break;
-                    case "slide_in_bottom":
-                        adapter = new SlideInBottomAnimationAdapter(innerAdapter);
-                        break;
-                    case "slide_in_right":
-                        adapter = new SlideInRightAnimationAdapter(innerAdapter);
-                        break;
-                    case "slide_in_left":
-                        adapter = new SlideInLeftAnimationAdapter(innerAdapter);
-                        break;
-                    default:
-                        adapter = new ScaleInAnimationAdapter(innerAdapter);
-                }
-            }
-
-            adapter.setFirstOnly(false);
-            adapter.setDuration(500);
+            SimplePickerAdapter adapter = new SimplePickerAdapter(context, params);
             rv.setAdapter(adapter);
 
             rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
