@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import complied.AttachSnapHelperWithListenerKt;
+import complied.AttachSnapHelperWithListener;
 import complied.OnSnapPositionChangeListener;
 import complied.SnapOnScrollListener.Behavior;
 import java.util.ArrayList;
@@ -46,11 +46,11 @@ public class FragmentDemo extends Fragment implements OnClickListener {
     LinearSnapHelper snapHelper = new LinearSnapHelper();
     snapHelper.attachToRecyclerView(recycler_view);
 
-    AttachSnapHelperWithListenerKt.attachSnapHelperWithListener(recycler_view, snapHelper,
+    AttachSnapHelperWithListener.attachSnapHelperWithListener(recycler_view, snapHelper,
         Behavior.NOTIFY_ON_SCROLL_STATE_IDLE, new OnSnapPositionChangeListener() {
           @Override
-          public void onSnapPositionChange(int var1) {
-            newValueSelected(adapter.getData(var1));
+          public void onSnapPositionChange(int position) {
+            newValueSelected(adapter.getData(position));
           }
         });
   }
