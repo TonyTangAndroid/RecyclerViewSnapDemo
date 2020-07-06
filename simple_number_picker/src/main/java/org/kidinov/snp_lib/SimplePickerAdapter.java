@@ -45,7 +45,6 @@ public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
   public static class ViewHolder extends RecyclerView.ViewHolder {
 
     private TextView textView;
-    private View notch;
     private Params params;
 
     public ViewHolder(View v, Params params) {
@@ -53,18 +52,6 @@ public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
       this.params = params;
       RelativeLayout view = (RelativeLayout) v;
       textView = view.findViewById(R.id.text);
-      notch = view.findViewById(R.id.notch);
-      if (params.isVertical()) {
-        ((RelativeLayout.LayoutParams) notch.getLayoutParams()).width = (int) params.getNotchSize();
-        ((RelativeLayout.LayoutParams) notch.getLayoutParams()).height = (int) EnvHelper
-            .pxFromDp(v.getContext(), 1);
-      } else {
-        ((RelativeLayout.LayoutParams) notch.getLayoutParams()).height = (int) params
-            .getNotchSize();
-        ((RelativeLayout.LayoutParams) notch.getLayoutParams()).width = (int) EnvHelper
-            .pxFromDp(v.getContext(), 1);
-      }
-      notch.setBackgroundColor(params.getNotchColor());
     }
 
     public void bind(int index) {
@@ -74,13 +61,11 @@ public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         textView.setTextSize(params.getSmallTextSize());
         textView.setTypeface(textView.getTypeface(), Typeface.NORMAL);
         textView.setTextColor(params.getSmallTextColor());
-        notch.setVisibility(View.VISIBLE);
       } else {
         textView.setText(String.valueOf(index));
         textView.setTextSize(params.getBigTextSize());
         textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
         textView.setTextColor(params.getBigTextColor());
-        notch.setVisibility(View.INVISIBLE);
       }
     }
   }

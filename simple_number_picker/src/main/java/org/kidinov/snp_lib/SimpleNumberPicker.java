@@ -67,11 +67,6 @@ public class SimpleNumberPicker extends LinearLayout {
     builder.setSmallTextSize(ta.getDimension(R.styleable.SNPicker_snp_smallTextSize,
         EnvHelper.pxFromDp(getContext(), 3)));
 
-    builder.setNotchSize(
-        ta.getDimension(R.styleable.SNPicker_snp_notchSize, EnvHelper.pxFromDp(getContext(), 10)));
-    builder.setNotchColor(
-        ta.getColor(R.styleable.SNPicker_snp_notchColor, Color.parseColor("#B6B6B6")));
-
     builder.setDelimNumber(ta.getInt(R.styleable.SNPicker_snp_delimNumber, 10));
 
     builder.setMin(ta.getInt(R.styleable.SNPicker_snp_min, 0));

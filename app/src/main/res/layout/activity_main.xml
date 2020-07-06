@@ -30,8 +30,6 @@
         app:snp_delimNumber="5"
         app:snp_max="500"
         app:snp_min="100"
-        app:snp_notchColor="#ff4a4533"
-        app:snp_notchSize="10dp"
         app:snp_smallTextColor="#FFC107"
         app:snp_smallTextSize="5sp"
         app:snp_vertical="true" />

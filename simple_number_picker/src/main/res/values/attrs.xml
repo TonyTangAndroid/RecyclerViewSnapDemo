@@ -6,8 +6,6 @@
         <attr name="snp_smallTextSize" format="dimension"/>
         <attr name="snp_bigTextSize" format="dimension"/>
         <attr name="snp_animationType" format="string"/>
-        <attr name="snp_notchSize" format="dimension"/>
-        <attr name="snp_notchColor" format="color"/>
         <attr name="snp_delimNumber" format="integer"/>
         <attr name="snp_min" format="integer"/>
         <attr name="snp_max" format="integer"/>

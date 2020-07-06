@@ -9,21 +9,17 @@ public class Params {
   private int bigTextColor;
   private float smallTextSize;
   private float bigTextSize;
-  private float notchSize;
-  private int notchColor;
   private int delimNumber;
   private int min;
   private int max;
   private boolean vertical;
 
   public Params(int smallTextColor, int bigTextColor, float smallTextSize, float bigTextSize,
-      float notchSize, int notchColor, int delimNumber, int min, int max, boolean vertical) {
+      int delimNumber, int min, int max, boolean vertical) {
     this.smallTextColor = smallTextColor;
     this.bigTextColor = bigTextColor;
     this.smallTextSize = smallTextSize;
     this.bigTextSize = bigTextSize;
-    this.notchSize = notchSize;
-    this.notchColor = notchColor;
     this.delimNumber = delimNumber;
     this.min = min;
     this.max = max;
@@ -44,14 +40,6 @@ public class Params {
 
   public float getBigTextSize() {
     return bigTextSize;
-  }
-
-  public float getNotchSize() {
-    return notchSize;
-  }
-
-  public int getNotchColor() {
-    return notchColor;
   }
 
   public int getDelimNumber() {
@@ -76,8 +64,6 @@ public class Params {
     private int bigTextColor;
     private float smallTextSize;
     private float bigTextSize;
-    private float notchSize;
-    private int notchColor;
     private int delimNumber;
     private boolean vertical;
     private int min;
@@ -104,16 +90,6 @@ public class Params {
       return this;
     }
 
-    public Builder setNotchSize(float notchSize) {
-      this.notchSize = notchSize;
-      return this;
-    }
-
-    public Builder setNotchColor(int notchColor) {
-      this.notchColor = notchColor;
-      return this;
-    }
-
     public Builder setDelimNumber(int delimNumber) {
       this.delimNumber = delimNumber;
       return this;
@@ -135,8 +111,8 @@ public class Params {
     }
 
     public Params build() {
-      return new Params(smallTextColor, bigTextColor, smallTextSize, bigTextSize, notchSize,
-          notchColor, delimNumber, min, max, vertical);
+      return new Params(smallTextColor, bigTextColor, smallTextSize, bigTextSize,
+          delimNumber, min, max, vertical);
     }
 
   }
