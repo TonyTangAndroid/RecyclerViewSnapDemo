@@ -31,9 +31,7 @@ public class SimpleNumberPicker extends LinearLayout {
     try {
       final Params params = readParams(typedArray);
 
-      llm = new LinearLayoutManager(context,
-          typedArray.getBoolean(R.styleable.SNPicker_snp_vertical, false)
-              ? LinearLayoutManager.VERTICAL : LinearLayoutManager.HORIZONTAL, false);
+      llm = new LinearLayoutManager(context);
       rv.setLayoutManager(llm);
 
       SimplePickerAdapter adapter = new SimplePickerAdapter(context, params);
@@ -76,7 +74,6 @@ public class SimpleNumberPicker extends LinearLayout {
     builder.setMin(ta.getInt(R.styleable.SNPicker_snp_min, 0));
     builder.setMax(ta.getInt(R.styleable.SNPicker_snp_max, 5000));
 
-    builder.setVertical(ta.getBoolean(R.styleable.SNPicker_snp_vertical, false));
     return builder.build();
   }
 

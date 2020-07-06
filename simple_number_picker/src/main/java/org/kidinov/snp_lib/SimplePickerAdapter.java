@@ -24,11 +24,8 @@ public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
   @NonNull
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    if (params.isVertical()) {
-      return new ViewHolder(li.inflate(R.layout.weight_item_vert, parent, false), params);
-    } else {
-      return new ViewHolder(li.inflate(R.layout.weight_item, parent, false), params);
-    }
+    return new ViewHolder(li.inflate(R.layout.weight_item, parent, false), params);
+
   }
 
   @Override

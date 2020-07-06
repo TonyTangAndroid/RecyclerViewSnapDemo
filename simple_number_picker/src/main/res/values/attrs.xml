@@ -9,7 +9,6 @@
         <attr name="snp_delimNumber" format="integer"/>
         <attr name="snp_min" format="integer"/>
         <attr name="snp_max" format="integer"/>
-        <attr name="snp_vertical" format="boolean"/>
     </declare-styleable>
 
 

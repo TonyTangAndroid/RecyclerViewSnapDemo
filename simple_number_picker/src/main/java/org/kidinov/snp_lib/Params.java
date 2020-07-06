@@ -12,10 +12,9 @@ public class Params {
   private int delimNumber;
   private int min;
   private int max;
-  private boolean vertical;
 
   public Params(int smallTextColor, int bigTextColor, float smallTextSize, float bigTextSize,
-      int delimNumber, int min, int max, boolean vertical) {
+      int delimNumber, int min, int max) {
     this.smallTextColor = smallTextColor;
     this.bigTextColor = bigTextColor;
     this.smallTextSize = smallTextSize;
@@ -23,7 +22,6 @@ public class Params {
     this.delimNumber = delimNumber;
     this.min = min;
     this.max = max;
-    this.vertical = vertical;
   }
 
   public int getSmallTextColor() {
@@ -46,10 +44,6 @@ public class Params {
     return delimNumber;
   }
 
-  public boolean isVertical() {
-    return vertical;
-  }
-
   public int getMin() {
     return min;
   }
@@ -65,7 +59,6 @@ public class Params {
     private float smallTextSize;
     private float bigTextSize;
     private int delimNumber;
-    private boolean vertical;
     private int min;
     private int max;
 
@@ -95,11 +88,6 @@ public class Params {
       return this;
     }
 
-    public Builder setVertical(boolean vertical) {
-      this.vertical = vertical;
-      return this;
-    }
-
     public Builder setMin(int min) {
       this.min = min;
       return this;
@@ -112,7 +100,7 @@ public class Params {
 
     public Params build() {
       return new Params(smallTextColor, bigTextColor, smallTextSize, bigTextSize,
-          delimNumber, min, max, vertical);
+          delimNumber, min, max);
     }
 
   }
