@@ -1,7 +1,6 @@
 package complied;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import androidx.recyclerview.widget.SnapHelper;
@@ -11,12 +10,11 @@ public final class SnapOnScrollListener extends OnScrollListener {
   private int snapPosition;
   private final SnapHelper snapHelper;
   private SnapOnScrollListener.Behavior behavior;
-  @Nullable
   private OnSnapPositionChangeListener onSnapPositionChangeListener;
 
   public SnapOnScrollListener(SnapHelper snapHelper,
       @NonNull SnapOnScrollListener.Behavior behavior,
-      @Nullable OnSnapPositionChangeListener onSnapPositionChangeListener) {
+      @NonNull OnSnapPositionChangeListener onSnapPositionChangeListener) {
     this.snapHelper = snapHelper;
     this.behavior = behavior;
     this.onSnapPositionChangeListener = onSnapPositionChangeListener;
@@ -43,16 +41,10 @@ public final class SnapOnScrollListener extends OnScrollListener {
     int snapPosition = SnapPositionHelper.getSnapPosition(this.snapHelper, recyclerView);
     boolean snapPositionChanged = this.snapPosition != snapPosition;
     if (snapPositionChanged) {
-      OnSnapPositionChangeListener listener = this.onSnapPositionChangeListener;
-      if (listener != null) {
-        listener.onSnapPositionChange(snapPosition);
-      }
-
+      this.onSnapPositionChangeListener.onSnapPositionChange(snapPosition);
       this.snapPosition = snapPosition;
     }
-
   }
-
 
   public enum Behavior {
     NOTIFY_ON_SCROLL,
