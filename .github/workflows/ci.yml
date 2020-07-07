@@ -15,10 +15,12 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ~/.gradle/caches
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/build.gradle.kts') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/src/main/kotlin/Library.kt') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Check style
         run: ./gradlew ktlintCheck
@@ -38,10 +40,12 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ~/.gradle/caches
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/build.gradle.kts') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/src/main/kotlin/Library.kt') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Unit tests
         run: ./gradlew testDebugUnitTest
@@ -62,11 +66,12 @@ jobs:
           java-version: 11
 
       # Restore the cache.
-      # Intentionally don't set 'restore-keys' so the cache never contains redundant dependencies.
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
         with:
           path: ~/.gradle/caches
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/build.gradle.kts') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/src/main/kotlin/Library.kt') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
 
       - name: Instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -74,26 +79,3 @@ jobs:
           api-level: ${{ matrix.api-level }}
           arch: x86
           script: ./gradlew connectedDebugAndroidTest
-
-  deploy-snapshot:
-    name: Deploy snapshot
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    if: github.ref == 'refs/heads/master'
-    needs: [check, unit-tests, instrumentation-tests]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: gradle/wrapper-validation-action@v1
-      - uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - uses: actions/cache@v1
-        with:
-          path: ~/.gradle/caches
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/build.gradle.kts') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/src/main/kotlin/Library.kt') }}
-
-      - name: Deploy Snapshot
-        env:
-          SONATYPE_NEXUS_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-          SONATYPE_NEXUS_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
-        run: ./upload_archives.sh
