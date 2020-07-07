@@ -1,7 +1,7 @@
 package complied;
 
-import static complied.SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL;
-import static complied.SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE;
+import static complied.SnapBehavior.NOTIFY_ON_SCROLL;
+import static complied.SnapBehavior.NOTIFY_ON_SCROLL_STATE_IDLE;
 
 import android.view.View;
 import androidx.annotation.NonNull;
@@ -12,57 +12,52 @@ import androidx.recyclerview.widget.SnapHelper;
 
 public final class SnapOnScrollListener extends OnScrollListener {
 
-  private int snapPosition;
+  private int currentPosition;
+
   private final SnapHelper snapHelper;
-  private final SnapOnScrollListener.Behavior behavior;
-  private final OnSnapPositionChangeListener onSnapPositionChangeListener;
+  private final SnapBehavior behavior;
+  private final OnSnapPositionChangeListener listener;
 
   public SnapOnScrollListener(SnapHelper snapHelper,
-      @NonNull SnapOnScrollListener.Behavior behavior,
-      @NonNull OnSnapPositionChangeListener onSnapPositionChangeListener) {
+      @NonNull SnapBehavior behavior,
+      @NonNull OnSnapPositionChangeListener listener) {
     this.snapHelper = snapHelper;
     this.behavior = behavior;
-    this.onSnapPositionChangeListener = onSnapPositionChangeListener;
-    this.snapPosition = RecyclerView.NO_POSITION;
+    this.listener = listener;
+    this.currentPosition = RecyclerView.NO_POSITION;
   }
 
 
   public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
     if (this.behavior == NOTIFY_ON_SCROLL) {
-      this.maybeNotifySnapPositionChange(recyclerView);
+      maybeNotifySnapPositionChange(recyclerView);
     }
   }
 
   public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
     if (this.behavior == NOTIFY_ON_SCROLL_STATE_IDLE
         && newState == RecyclerView.SCROLL_STATE_IDLE) {
-      this.maybeNotifySnapPositionChange(recyclerView);
+      maybeNotifySnapPositionChange(recyclerView);
     }
 
   }
 
   private void maybeNotifySnapPositionChange(RecyclerView recyclerView) {
-    int snapPosition;
-    LayoutManager layoutManager = recyclerView.getLayoutManager();
-    if (layoutManager != null) {
-      View snapView = this.snapHelper.findSnapView(layoutManager);
-      if (snapView != null) {
-        snapPosition = layoutManager.getPosition(snapView);
-      } else {
-        snapPosition = RecyclerView.NO_POSITION;
-      }
-    } else {
-      snapPosition = RecyclerView.NO_POSITION;
-    }
-    boolean snapPositionChanged = this.snapPosition != snapPosition;
+    int snapPosition = currentSnappedPosition(recyclerView);
+    boolean snapPositionChanged = this.currentPosition != snapPosition;
     if (snapPositionChanged) {
-      this.onSnapPositionChangeListener.onSnapPositionChange(snapPosition);
-      this.snapPosition = snapPosition;
+      this.listener.onSnapPositionChange(snapPosition);
+      this.currentPosition = snapPosition;
     }
   }
 
-  public enum Behavior {
-    NOTIFY_ON_SCROLL,
-    NOTIFY_ON_SCROLL_STATE_IDLE;
+  private int currentSnappedPosition(RecyclerView recyclerView) {
+    LayoutManager layoutManager = recyclerView.getLayoutManager();
+    if (layoutManager == null) {
+      return RecyclerView.NO_POSITION;
+    }
+    final View snapView = this.snapHelper.findSnapView(layoutManager);
+    return snapView != null ? layoutManager.getPosition(snapView) : RecyclerView.NO_POSITION;
   }
+
 }

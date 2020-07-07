@@ -1,5 +1,7 @@
 package org.kidinov.snp_lib;
 
+import static complied.SnapBehavior.NOTIFY_ON_SCROLL_STATE_IDLE;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +16,14 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import complied.OnSnapPositionChangeListener;
 import complied.SnapOnScrollListener;
-import complied.SnapOnScrollListener.Behavior;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentDemo extends Fragment implements OnClickListener, OnSnapPositionChangeListener {
+public class FragmentDemo extends Fragment implements OnClickListener,
+    OnSnapPositionChangeListener {
 
   private RecyclerView recycler_view;
   private TextView tv_selected_item;
-  private LinearLayoutManager llm;
   private SimplePickerAdapter adapter;
 
   @Nullable
@@ -39,14 +40,14 @@ public class FragmentDemo extends Fragment implements OnClickListener, OnSnapPos
   }
 
   public void initRecyclerView() {
-    llm = new LinearLayoutManager(requireContext());
-    recycler_view.setLayoutManager(llm);
+    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
+    recycler_view.setLayoutManager(linearLayoutManager);
     adapter = new SimplePickerAdapter(requireContext(), params(), this);
     recycler_view.setAdapter(adapter);
     final LinearSnapHelper snapHelper = new LinearSnapHelper();
     snapHelper.attachToRecyclerView(recycler_view);
-    recycler_view.addOnScrollListener(new SnapOnScrollListener(snapHelper,
-        Behavior.NOTIFY_ON_SCROLL_STATE_IDLE, this));
+    SnapOnScrollListener listener = new SnapOnScrollListener(snapHelper, NOTIFY_ON_SCROLL_STATE_IDLE, this);
+    recycler_view.addOnScrollListener(listener);
   }
 
   private void newValueSelected(String data) {
