@@ -1,5 +1,8 @@
 package complied;
 
+import static complied.SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL;
+import static complied.SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
@@ -9,8 +12,8 @@ public final class SnapOnScrollListener extends OnScrollListener {
 
   private int snapPosition;
   private final SnapHelper snapHelper;
-  private SnapOnScrollListener.Behavior behavior;
-  private OnSnapPositionChangeListener onSnapPositionChangeListener;
+  private final SnapOnScrollListener.Behavior behavior;
+  private final OnSnapPositionChangeListener onSnapPositionChangeListener;
 
   public SnapOnScrollListener(SnapHelper snapHelper,
       @NonNull SnapOnScrollListener.Behavior behavior,
@@ -23,14 +26,14 @@ public final class SnapOnScrollListener extends OnScrollListener {
 
 
   public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-    if (this.behavior == SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL) {
+    if (this.behavior == NOTIFY_ON_SCROLL) {
       this.maybeNotifySnapPositionChange(recyclerView);
     }
 
   }
 
   public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-    if (this.behavior == SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE
+    if (this.behavior == NOTIFY_ON_SCROLL_STATE_IDLE
         && newState == RecyclerView.SCROLL_STATE_IDLE) {
       this.maybeNotifySnapPositionChange(recyclerView);
     }
