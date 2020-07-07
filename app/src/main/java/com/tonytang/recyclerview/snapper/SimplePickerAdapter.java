@@ -1,4 +1,4 @@
-package org.kidinov.snp_lib;
+package com.tonytang.recyclerview.snapper;
 
 import android.content.Context;
 import android.view.LayoutInflater;

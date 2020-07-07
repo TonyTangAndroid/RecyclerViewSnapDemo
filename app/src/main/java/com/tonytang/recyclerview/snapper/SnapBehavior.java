@@ -1,4 +1,4 @@
-package complied;
+package com.tonytang.recyclerview.snapper;
 
 public enum SnapBehavior {
   NOTIFY_ON_SCROLL,

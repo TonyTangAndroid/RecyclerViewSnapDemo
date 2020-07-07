@@ -1,8 +1,7 @@
-package org.kidinov.simplenumberpicker;
+package com.tonytang.recyclerview.snapper;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import org.kidinov.snp_lib.FragmentDemo;
 
 public class MainActivity extends AppCompatActivity {
 

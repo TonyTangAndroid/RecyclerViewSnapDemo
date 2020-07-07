@@ -1,4 +1,4 @@
-package complied;
+package com.tonytang.recyclerview.snapper;
 
 public interface OnSnapPositionChangeListener {
 

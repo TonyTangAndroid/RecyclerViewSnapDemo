@@ -1,6 +1,6 @@
-package org.kidinov.snp_lib;
+package com.tonytang.recyclerview.snapper;
 
-import static complied.SnapBehavior.NOTIFY_ON_SCROLL_STATE_IDLE;
+import static com.tonytang.recyclerview.snapper.SnapBehavior.NOTIFY_ON_SCROLL_STATE_IDLE;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,8 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import complied.OnSnapPositionChangeListener;
-import complied.SnapOnScrollListener;
 import java.util.ArrayList;
 import java.util.List;
 

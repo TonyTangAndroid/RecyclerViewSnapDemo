@@ -1,1 +1,1 @@
-include ':app', ':simple_number_picker'
+include ':app'

@@ -1,7 +1,7 @@
-package complied;
+package com.tonytang.recyclerview.snapper;
 
-import static complied.SnapBehavior.NOTIFY_ON_SCROLL;
-import static complied.SnapBehavior.NOTIFY_ON_SCROLL_STATE_IDLE;
+import static com.tonytang.recyclerview.snapper.SnapBehavior.NOTIFY_ON_SCROLL;
+import static com.tonytang.recyclerview.snapper.SnapBehavior.NOTIFY_ON_SCROLL_STATE_IDLE;
 
 import android.view.View;
 import androidx.annotation.NonNull;

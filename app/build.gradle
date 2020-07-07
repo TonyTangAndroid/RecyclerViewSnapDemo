@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "org.kidinov.simplenumberpicker"
+        applicationId "com.tonytang.recyclerview.snapper"
         minSdkVersion 22
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -24,6 +25,13 @@ android {
 }
 
 dependencies {
+    annotationProcessor 'com.uber.motif:motif-compiler:0.3.3'
+    implementation 'com.uber.motif:motif:0.3.3'
+    implementation "androidx.fragment:fragment:1.2.5"
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation project(':simple_number_picker')
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    testImplementation 'junit:junit:4.13'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
