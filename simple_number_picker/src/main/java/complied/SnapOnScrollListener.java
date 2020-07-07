@@ -14,6 +14,16 @@ public final class SnapOnScrollListener extends OnScrollListener {
   @Nullable
   private OnSnapPositionChangeListener onSnapPositionChangeListener;
 
+  public SnapOnScrollListener(SnapHelper snapHelper,
+      @NonNull SnapOnScrollListener.Behavior behavior,
+      @Nullable OnSnapPositionChangeListener onSnapPositionChangeListener) {
+    this.snapHelper = snapHelper;
+    this.behavior = behavior;
+    this.onSnapPositionChangeListener = onSnapPositionChangeListener;
+    this.snapPosition = RecyclerView.NO_POSITION;
+  }
+
+
   public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
     if (this.behavior == SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL) {
       this.maybeNotifySnapPositionChange(recyclerView);
@@ -23,7 +33,7 @@ public final class SnapOnScrollListener extends OnScrollListener {
 
   public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
     if (this.behavior == SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE
-        && newState == 0) {
+        && newState == RecyclerView.SCROLL_STATE_IDLE) {
       this.maybeNotifySnapPositionChange(recyclerView);
     }
 
@@ -41,32 +51,6 @@ public final class SnapOnScrollListener extends OnScrollListener {
       this.snapPosition = snapPosition;
     }
 
-  }
-
-  public final SnapOnScrollListener.Behavior getBehavior() {
-    return this.behavior;
-  }
-
-  public final void setBehavior(SnapOnScrollListener.Behavior behavior) {
-    this.behavior = behavior;
-  }
-
-  @Nullable
-  public final OnSnapPositionChangeListener getOnSnapPositionChangeListener() {
-    return this.onSnapPositionChangeListener;
-  }
-
-  public final void setOnSnapPositionChangeListener(@Nullable OnSnapPositionChangeListener var1) {
-    this.onSnapPositionChangeListener = var1;
-  }
-
-  public SnapOnScrollListener(SnapHelper snapHelper,
-      @NonNull SnapOnScrollListener.Behavior behavior,
-      @Nullable OnSnapPositionChangeListener onSnapPositionChangeListener) {
-    this.snapHelper = snapHelper;
-    this.behavior = behavior;
-    this.onSnapPositionChangeListener = onSnapPositionChangeListener;
-    this.snapPosition = -1;
   }
 
 
