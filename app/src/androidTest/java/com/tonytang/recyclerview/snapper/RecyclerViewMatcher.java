@@ -3,7 +3,7 @@ package com.tonytang.recyclerview.snapper;
 import android.content.res.Resources;
 import android.view.View;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.Objects;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -50,9 +50,9 @@ public class RecyclerViewMatcher {
           RecyclerView recyclerView =
               (RecyclerView) view.getRootView().findViewById(recyclerViewId);
           if (recyclerView != null && recyclerView.getId() == recyclerViewId) {
-            childView =
-                Objects.requireNonNull(recyclerView.findViewHolderForLayoutPosition(position))
-                    .itemView;
+            ViewHolder holder = recyclerView
+                .findViewHolderForLayoutPosition(position);
+            childView = holder == null ? null : holder.itemView;
           } else {
             return false;
           }
@@ -61,7 +61,7 @@ public class RecyclerViewMatcher {
         if (targetViewId == -1) {
           return view == childView;
         } else {
-          View targetView = childView.findViewById(targetViewId);
+          View targetView = childView == null ? null : childView.findViewById(targetViewId);
           return view == targetView;
         }
       }

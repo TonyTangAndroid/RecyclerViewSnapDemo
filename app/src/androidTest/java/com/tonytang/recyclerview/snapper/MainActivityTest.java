@@ -2,6 +2,7 @@ package com.tonytang.recyclerview.snapper;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -54,11 +55,24 @@ public class MainActivityTest {
     onView(ViewMatchers.withId(R.id.recycler_view))
         .perform(RecyclerViewActions.actionOnItemAtPosition(9, click()));
 
-    //Have to trigger scrolled up
+    //Have to trigger scrolled up to avoid flake ness
     onView(ViewMatchers.withId(R.id.recycler_view)).perform(ViewActions.swipeUp());
 
     onView(withRecyclerView(R.id.recycler_view).atPositionOnView(9, R.id.text))
         .check(matches(withText("Selected Tier 9")));
+
+  }
+
+  @Test
+  public void unselectedItem_shouldNotBeUpdated() {
+    onView(ViewMatchers.withId(R.id.recycler_view))
+        .perform(RecyclerViewActions.actionOnItemAtPosition(9, click()));
+
+    //Have to trigger scrolled up to avoid flake ness
+    onView(ViewMatchers.withId(R.id.recycler_view)).perform(ViewActions.swipeUp());
+
+    onView(withRecyclerView(R.id.recycler_view).atPositionOnView(8, R.id.text))
+        .check(matches(withText("Tier 8")));
 
   }
 
