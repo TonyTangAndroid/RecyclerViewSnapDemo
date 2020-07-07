@@ -23,6 +23,7 @@ public class FragmentDemo extends Fragment implements OnClickListener,
   private RecyclerView recycler_view;
   private TextView tv_selected_item;
   private SimplePickerAdapter adapter;
+  private final SelectedPositionStream selectedPositionStream = new SelectedPositionStream();
 
   @Nullable
   @Override
@@ -40,33 +41,36 @@ public class FragmentDemo extends Fragment implements OnClickListener,
   public void initRecyclerView() {
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
     recycler_view.setLayoutManager(linearLayoutManager);
-    adapter = new SimplePickerAdapter(requireContext(), params(), this);
+    adapter = new SimplePickerAdapter(requireContext(), params(), this, selectedPositionStream);
     recycler_view.setAdapter(adapter);
     final LinearSnapHelper snapHelper = new LinearSnapHelper();
     snapHelper.attachToRecyclerView(recycler_view);
-    SnapOnScrollListener listener = new SnapOnScrollListener(snapHelper, NOTIFY_ON_SCROLL_STATE_IDLE, this);
+    SnapOnScrollListener listener = new SnapOnScrollListener(snapHelper,
+        NOTIFY_ON_SCROLL_STATE_IDLE, this);
     recycler_view.addOnScrollListener(listener);
   }
 
   private void newValueSelected(String data) {
-    tv_selected_item.setText(data);
+    tv_selected_item.setText(SelectedTextBuilder.buildSelectedText(data));
   }
 
   private List<String> params() {
     List<String> result = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
-      result.add("Tier" + i);
+      result.add("Tier " + i);
     }
     return result;
   }
 
   @Override
   public void onClick(View view) {
-    recycler_view.smoothScrollToPosition((int) view.getTag());
+    recycler_view.scrollToPosition((int) view.getTag());
   }
 
   @Override
   public void onSnapPositionChange(int position) {
+    selectedPositionStream.setSelectedPosition(position);
     newValueSelected(adapter.getData(position));
+    adapter.notifyItemChanged(position);
   }
 }
