@@ -16,8 +16,6 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
   }
 
   public void bind(String value, boolean selected) {
-    textView.setText(value);
-    textView.setTextColor(textView.getContext().getResources()
-        .getColor(selected ? android.R.color.holo_red_dark : android.R.color.black));
+    textView.setText(selected ? SelectedTextBuilder.buildSelectedText(value) : value);
   }
 }

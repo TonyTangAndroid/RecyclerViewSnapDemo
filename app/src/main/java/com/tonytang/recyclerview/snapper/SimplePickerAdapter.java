@@ -14,12 +14,15 @@ public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
   private final Context context;
   private final List<String> list;
   private final OnClickListener onClickListener;
+  private SelectedPositionStream selectedPositionStream;
 
   public SimplePickerAdapter(Context context, List<String> list,
-      OnClickListener onClickListener) {
+      OnClickListener onClickListener,
+      SelectedPositionStream selectedPositionStream) {
     this.context = context;
     this.list = list;
     this.onClickListener = onClickListener;
+    this.selectedPositionStream = selectedPositionStream;
   }
 
   @NonNull
@@ -37,8 +40,10 @@ public class SimplePickerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     itemViewHolder.bind(list.get(position), selected(position));
   }
 
-  private boolean selected(int position) {
-    return position % 2 == 0;
+  private boolean selected(int current) {
+    int selectedPosition = selectedPositionStream.getSelectedPosition();
+    System.out.println("selectedPosition:" + selectedPosition + ", current:" + current);
+    return selectedPosition == current;
   }
 
   @Override
