@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import complied.AttachSnapHelperWithListener;
 import complied.OnSnapPositionChangeListener;
+import complied.SnapOnScrollListener;
 import complied.SnapOnScrollListener.Behavior;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +43,10 @@ public class FragmentDemo extends Fragment implements OnClickListener, OnSnapPos
     recycler_view.setLayoutManager(llm);
     adapter = new SimplePickerAdapter(requireContext(), params(), this);
     recycler_view.setAdapter(adapter);
-    LinearSnapHelper snapHelper = new LinearSnapHelper();
+    final LinearSnapHelper snapHelper = new LinearSnapHelper();
     snapHelper.attachToRecyclerView(recycler_view);
-
-    AttachSnapHelperWithListener.attachSnapHelperWithListener(recycler_view, snapHelper,
-        Behavior.NOTIFY_ON_SCROLL_STATE_IDLE, this);
+    recycler_view.addOnScrollListener(new SnapOnScrollListener(snapHelper,
+        Behavior.NOTIFY_ON_SCROLL_STATE_IDLE, this));
   }
 
   private void newValueSelected(String data) {
@@ -60,18 +59,6 @@ public class FragmentDemo extends Fragment implements OnClickListener, OnSnapPos
       result.add("Tier" + i);
     }
     return result;
-  }
-
-  private int selectedIndex() {
-    int last = llm.findLastCompletelyVisibleItemPosition();
-    System.out.println("Last:" + last);
-    if (last == llm.getItemCount() - 1) {
-      return last;
-    }
-    int firstVisibleItemPosition = llm.findFirstVisibleItemPosition();
-    int lastVisibleItemPosition = llm.findLastVisibleItemPosition();
-    return firstVisibleItemPosition
-        + (lastVisibleItemPosition - firstVisibleItemPosition) / 2;
   }
 
   @Override

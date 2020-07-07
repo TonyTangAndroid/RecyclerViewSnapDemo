@@ -3,8 +3,10 @@ package complied;
 import static complied.SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL;
 import static complied.SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE;
 
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
 import androidx.recyclerview.widget.SnapHelper;
 
@@ -29,7 +31,6 @@ public final class SnapOnScrollListener extends OnScrollListener {
     if (this.behavior == NOTIFY_ON_SCROLL) {
       this.maybeNotifySnapPositionChange(recyclerView);
     }
-
   }
 
   public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -41,7 +42,18 @@ public final class SnapOnScrollListener extends OnScrollListener {
   }
 
   private void maybeNotifySnapPositionChange(RecyclerView recyclerView) {
-    int snapPosition = SnapPositionHelper.getSnapPosition(this.snapHelper, recyclerView);
+    int snapPosition;
+    LayoutManager layoutManager = recyclerView.getLayoutManager();
+    if (layoutManager != null) {
+      View snapView = this.snapHelper.findSnapView(layoutManager);
+      if (snapView != null) {
+        snapPosition = layoutManager.getPosition(snapView);
+      } else {
+        snapPosition = RecyclerView.NO_POSITION;
+      }
+    } else {
+      snapPosition = RecyclerView.NO_POSITION;
+    }
     boolean snapPositionChanged = this.snapPosition != snapPosition;
     if (snapPositionChanged) {
       this.onSnapPositionChangeListener.onSnapPositionChange(snapPosition);
